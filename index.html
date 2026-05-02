@@ -21,6 +21,16 @@
             margin-bottom: 30px;
             text-align: center;
         }
+        .header .logo {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            border: 4px solid #667eea;
+            background: white;
+            padding: 5px;
+        }
         .header h1 {
             color: #667eea;
             font-size: 2.5em;
@@ -117,7 +127,29 @@
             align-items: center;
             gap: 10px;
         }
-        .token-icon { font-size: 1.5em; }
+        .token-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .token-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        .token-badge img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
         .highlight {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -166,6 +198,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
+            <img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX Logo" class="logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23667eea%22/><text x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22>BX</text></svg>'">
             <h1>🚀 BossX</h1>
             <p>Company Records & Founders Dashboard</p>
             <p style="margin-top: 10px; font-size: 0.9em;">Last Updated: <span id="currentDate"></span></p>
@@ -196,7 +229,7 @@
             <div class="stat-card">
                 <h3>Total Tokens</h3>
                 <div class="value">2,960.85</div>
-                <div class="subtext">@ $0.85 per token</div>
+                <div class="subtext"><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> BossX</span></div>
             </div>
             <div class="stat-card">
                 <h3>Total Claims</h3>
@@ -297,7 +330,7 @@
             <div class="section">
                 <h2>💼 Fery's Wallet</h2>
                 <div class="founder-card">
-                    <h3><span class="token-icon">🪙</span> Wallet Components</h3>
+                    <h3><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX" class="token-icon"> Wallet Components</h3>
                     <table>
                         <thead>
                             <tr>
@@ -310,27 +343,27 @@
                             <tr>
                                 <td>Premine Slot 1/2 (Assistance)</td>
                                 <td>$100.00</td>
-                                <td>117.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 117.65</span></td>
                             </tr>
                             <tr>
                                 <td>Premine Slot 1/2 (Private)</td>
                                 <td>$350.00</td>
-                                <td>411.76 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 411.76</span></td>
                             </tr>
                             <tr>
                                 <td>Premine Slot 2/2 (Private)</td>
                                 <td>$20.00</td>
-                                <td>23.53 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 23.53</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Scanner</td>
                                 <td>$30.00</td>
-                                <td>35.29 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 35.29</span></td>
                             </tr>
                             <tr style="background: #d4edda; font-weight: bold;">
                                 <td>TOTAL</td>
                                 <td>$500.00</td>
-                                <td>588.24 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 588.24</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -341,7 +374,7 @@
             <div class="section">
                 <h2>💼 Adhan's Wallet</h2>
                 <div class="founder-card">
-                    <h3><span class="token-icon">🪙</span> Wallet Components</h3>
+                    <h3><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX" class="token-icon"> Wallet Components</h3>
                     <table>
                         <thead>
                             <tr>
@@ -354,52 +387,52 @@
                             <tr>
                                 <td>Premine Slot 1/2 (Assistance)</td>
                                 <td>$100.00</td>
-                                <td>117.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 117.65</span></td>
                             </tr>
                             <tr>
                                 <td>Premine Slot 1/2 (Private)</td>
                                 <td>$100.00</td>
-                                <td>117.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 117.65</span></td>
                             </tr>
                             <tr>
                                 <td>Premine Slot 2/2 (Private)</td>
                                 <td>$100.00</td>
-                                <td>117.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 117.65</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Rent</td>
                                 <td>$87.70</td>
-                                <td>103.18 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 103.18</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Internet</td>
                                 <td>$5.80</td>
-                                <td>6.82 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 6.82</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Electricity</td>
                                 <td>$5.80</td>
-                                <td>6.82 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 6.82</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Scanner + Coffee</td>
                                 <td>$82.00</td>
-                                <td>96.47 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 96.47</span></td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Transfer from Fajar</strong></td>
                                 <td><strong>$480.00</strong></td>
-                                <td><strong>564.71 🪙</strong></td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 564.71</span></td>
                             </tr>
                             <tr style="background: #e7f3ff;">
                                 <td><strong>Claim Card + Internet</strong></td>
                                 <td><strong>$11.60</strong></td>
-                                <td><strong>13.65 🪙</strong></td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 13.65</span></td>
                             </tr>
                             <tr style="background: #d4edda; font-weight: bold;">
                                 <td>TOTAL</td>
                                 <td>$972.90</td>
-                                <td>1,144.60 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 1,144.60</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -410,7 +443,7 @@
             <div class="section">
                 <h2>💼 Fajar's Wallet</h2>
                 <div class="founder-card">
-                    <h3><span class="token-icon">🪙</span> Wallet Components</h3>
+                    <h3><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX" class="token-icon"> Wallet Components</h3>
                     <table>
                         <thead>
                             <tr>
@@ -423,37 +456,37 @@
                             <tr>
                                 <td>Premine Slot 1/2 (Assistance)</td>
                                 <td>$100.00</td>
-                                <td>117.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 117.65</span></td>
                             </tr>
                             <tr>
                                 <td>Premine Slot 1/2 (Private)</td>
                                 <td>$250.00</td>
-                                <td>294.12 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 294.12</span></td>
                             </tr>
                             <tr style="background: #fff3cd;">
                                 <td><strong>Premine Slot 2/2 (Remaining)</strong></td>
                                 <td><strong>$70.00</strong></td>
-                                <td><strong>82.35 🪙</strong></td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 82.35</span></td>
                             </tr>
                             <tr>
                                 <td>Claim TRX Fees</td>
                                 <td>$15.00</td>
-                                <td>17.65 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 17.65</span></td>
                             </tr>
                             <tr>
                                 <td>Claim Scanner</td>
                                 <td>$128.80</td>
-                                <td>151.53 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 151.53</span></td>
                             </tr>
                             <tr>
                                 <td>Claim HP + Fan</td>
                                 <td>$480.00</td>
-                                <td>564.71 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 564.71</span></td>
                             </tr>
                             <tr style="background: #d4edda; font-weight: bold;">
                                 <td>TOTAL</td>
                                 <td>$1,043.80</td>
-                                <td>1,228.01 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 1,228.01</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -480,7 +513,7 @@
                             <tr>
                                 <td>No data recorded</td>
                                 <td>$0.00</td>
-                                <td>0 🪙</td>
+                                <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 0</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -520,11 +553,11 @@
                     </tr>
                     <tr>
                         <td>Transferred Value</td>
-                        <td><span class="highlight">$480.00</span> (564.71 tokens)</td>
+                        <td><span class="highlight">$480.00</span> <span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 564.71</span></td>
                     </tr>
                     <tr>
                         <td>Remaining with Fajar</td>
-                        <td><span class="highlight">$70.00</span> (82.35 tokens)</td>
+                        <td><span class="highlight">$70.00</span> <span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 82.35</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -547,35 +580,35 @@
                     <tr>
                         <td><strong>Fery</strong></td>
                         <td>$500.00</td>
-                        <td>588.24 🪙</td>
+                        <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 588.24</span></td>
                         <td>19.87%</td>
                         <td>$30.00</td>
                     </tr>
                     <tr>
                         <td><strong>Adhan</strong></td>
                         <td>$972.90</td>
-                        <td>1,144.60 🪙</td>
+                        <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 1,144.60</span></td>
                         <td>38.66%</td>
                         <td>$192.90</td>
                     </tr>
                     <tr>
                         <td><strong>Fajar</strong></td>
                         <td>$1,043.80</td>
-                        <td>1,228.01 🪙</td>
+                        <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 1,228.01</span></td>
                         <td>41.47%</td>
                         <td>$623.80</td>
                     </tr>
                     <tr>
                         <td><strong>Mirwan</strong></td>
                         <td>$0.00</td>
-                        <td>0 🪙</td>
+                        <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 0</span></td>
                         <td>0.00%</td>
                         <td>$0.00</td>
                     </tr>
                     <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: bold;">
                         <td>GRAND TOTAL</td>
                         <td>$2,516.70</td>
-                        <td>2,960.85 🪙</td>
+                        <td><span class="token-badge"><img src="https://i.ibb.co.com/MyczDTQp/logo.jpg" alt="BossX"> 2,960.85</span></td>
                         <td>100%</td>
                         <td>$846.70</td>
                     </tr>
@@ -589,7 +622,7 @@
             <div class="alert">
                 <ul style="margin-left: 20px; line-height: 1.8;">
                     <li>All data recorded is <strong>factual</strong> based on provided information</li>
-                    <li>Token calculations based on reference price of <strong>$0.85 per token</strong></li>
+                    <li>Token calculations based on reference price of <strong>$0.85 per BossX Token</strong></li>
                     <li>Private wallets are <strong>personal assets</strong>, separate from company assets</li>
                     <li>Mining assistance of $100 given to Fery, Adhan, and Fajar only</li>
                     <li>All claims/reimbursements documented per founder</li>
