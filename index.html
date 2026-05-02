@@ -192,6 +192,20 @@
             background: #d1ecf1;
             border-left-color: #17a2b8;
         }
+        .fund-source {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 5px 0;
+            border-left: 3px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .fund-source .label { color: #555; font-weight: 500; }
+        .fund-source .amount { color: #667eea; font-weight: bold; }
+        .fund-source.free { border-left-color: #28a745; }
+        .fund-source.free .amount { color: #28a745; }
     </style>
 </head>
 <body>
@@ -212,19 +226,19 @@
                 <div class="subtext">Active Members</div>
             </div>
             <div class="stat-card">
-                <h3>Initial Capital</h3>
+                <h3>Founder Deposits</h3>
                 <div class="value">$200</div>
-                <div class="subtext">4 x $50 deposit</div>
+                <div class="subtext">4 x $50</div>
+            </div>
+            <div class="stat-card">
+                <h3>Free Fund</h3>
+                <div class="value">$406.90</div>
+                <div class="subtext">Separate allocation</div>
             </div>
             <div class="stat-card">
                 <h3>Total Company Fund</h3>
                 <div class="value">$618.50</div>
-                <div class="subtext">Before premine</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Private Wallets</h3>
-                <div class="value">$2,516.70</div>
-                <div class="subtext">All founders combined</div>
+                <div class="subtext">$200 + $406.90</div>
             </div>
             <div class="stat-card">
                 <h3>Total Tokens</h3>
@@ -247,7 +261,6 @@
                         <th>No</th>
                         <th>Founder Name</th>
                         <th>Initial Deposit</th>
-                        <th>Mining Assistance</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -256,46 +269,76 @@
                         <td>1</td>
                         <td><strong>Fery</strong></td>
                         <td>$50.00</td>
-                        <td>$100.00</td>
                         <td><span class="badge badge-success">Active</span></td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td><strong>Adhan</strong></td>
                         <td>$50.00</td>
-                        <td>$100.00</td>
                         <td><span class="badge badge-success">Active</span></td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td><strong>Fajar</strong></td>
                         <td>$50.00</td>
-                        <td>$100.00</td>
                         <td><span class="badge badge-success">Active</span></td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td><strong>Mirwan</strong></td>
                         <td>$50.00</td>
-                        <td>$0.00</td>
-                        <td><span class="badge badge-warning">No Assistance</span></td>
+                        <td><span class="badge badge-success">Active</span></td>
                     </tr>
                     <tr style="background: #e9ecef; font-weight: bold;">
-                        <td colspan="2">TOTAL</td>
+                        <td colspan="2">TOTAL DEPOSITS</td>
                         <td>$200.00</td>
-                        <td>$300.00</td>
                         <td>-</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Company Activities -->
+        <!-- Company Activities - SIMPLIFIED -->
         <div class="section">
-            <h2>🏢 Company Activities</h2>
+            <h2>🏢 Company Fund Sources</h2>
             <div class="alert alert-info">
-                <strong>Premine Activity:</strong> BossX Token premine conducted at $0.85 per token using total company fund of $618.50
+                <strong>Note:</strong> Free Fund ($406.90) is recorded separately and not automatically summed with founder deposits.
             </div>
+            
+            <h3 style="color:#667eea; margin:15px 0 10px; font-size:1.1em;">💰 Fund Breakdown</h3>
+            
+            <div class="fund-source">
+                <span class="label">Fery Deposit</span>
+                <span class="amount">$50.00</span>
+            </div>
+            <div class="fund-source">
+                <span class="label">Adhan Deposit</span>
+                <span class="amount">$50.00</span>
+            </div>
+            <div class="fund-source">
+                <span class="label">Fajar Deposit</span>
+                <span class="amount">$50.00</span>
+            </div>
+            <div class="fund-source">
+                <span class="label">Mirwan Deposit</span>
+                <span class="amount">$50.00</span>
+            </div>
+            <div class="fund-source free">
+                <span class="label">🎁 Free Fund (Separate)</span>
+                <span class="amount">$406.90</span>
+            </div>
+            
+            <div style="margin-top:15px; padding-top:15px; border-top:2px dashed #ddd;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.1em;">
+                    <span>Total Company Fund:</span>
+                    <span style="color:#667eea;">$618.50</span>
+                </div>
+                <div style="font-size:0.85em; color:#888; margin-top:5px;">
+                    ($50×4 founders + $406.90 free fund)
+                </div>
+            </div>
+
+            <h3 style="color:#667eea; margin:25px 0 10px; font-size:1.1em;">🪙 Fund Usage</h3>
             <table>
                 <thead>
                     <tr>
@@ -306,19 +349,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Initial Company Fund</td>
-                        <td>Total capital before activities</td>
-                        <td><span class="highlight">$618.50</span></td>
-                    </tr>
-                    <tr>
                         <td>Premine BossX Token</td>
                         <td>Token price: $0.85/token</td>
-                        <td>-$618.50</td>
+                        <td><span style="color:#dc3545; font-weight:bold;">-$618.50</span></td>
                     </tr>
-                    <tr>
-                        <td>Mining Assistance</td>
-                        <td>Private mining for 3 founders (Fery, Adhan, Fajar)</td>
-                        <td>-$300.00</td>
+                    <tr style="background:#d4edda; font-weight:bold;">
+                        <td>Remaining Balance</td>
+                        <td>After premine activity</td>
+                        <td style="color:#28a745;">$0.00</td>
                     </tr>
                 </tbody>
             </table>
@@ -624,8 +662,8 @@
                     <li>All data recorded is <strong>factual</strong> based on provided information</li>
                     <li>Token calculations based on reference price of <strong>$0.85 per BossX Token</strong></li>
                     <li>Private wallets are <strong>personal assets</strong>, separate from company assets</li>
-                    <li>Mining assistance of $100 given to Fery, Adhan, and Fajar only</li>
-                    <li>All claims/reimbursements documented per founder</li>
+                    <li>Founder deposits: 4 founders × $50 = $200 total</li>
+                    <li>Free Fund ($406.90) is recorded separately per request</li>
                     <li>Transfer transaction between Fajar and Adhan is partial transfer ($480 of $550)</li>
                     <li>For legal purposes, refer to signed Transfer Agreement document</li>
                 </ul>
