@@ -3,553 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BossX - Company Records Dashboard</title>
+    <title>BossX - Simple Records</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .container { max-width: 1400px; margin: 0 auto; }
-        .header {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .header .logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 50%;
-            border: 4px solid #667eea;
-            background: white;
-            padding: 5px;
-        }
-        .header h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-        .header p { color: #666; font-size: 1.1em; }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-card h3 {
-            color: #888;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .stat-card .value {
-            color: #667eea;
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .stat-card .subtext { color: #999; font-size: 0.85em; margin-top: 5px; }
-        .stat-card.success .value { color: #28a745; }
-        .section {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
-        .section h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
-            display: inline-block;
-        }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
-        th {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 1px;
-        }
-        tr:hover { background-color: #f5f5f5; }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        .badge-success { background: #d4edda; color: #155724; }
-        .badge-warning { background: #fff3cd; color: #856404; }
-        .badge-info { background: #d1ecf1; color: #0c5460; }
-        .founder-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border-left: 5px solid #667eea;
-        }
-        .founder-card h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .token-icon {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-            vertical-align: middle;
-            margin-right: 5px;
-        }
-        .token-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3px 10px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-        .token-badge img { width: 16px; height: 16px; object-fit: contain; }
-        .highlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
-        }
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.8em; }
-            .grid-2 { grid-template-columns: 1fr; }
-            table { font-size: 0.9em; }
-            th, td { padding: 8px 10px; }
-        }
-        .print-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            margin-top: 20px;
-            transition: transform 0.3s;
-        }
-        .print-btn:hover { transform: scale(1.05); }
-        .alert {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .alert-success {
-            background: #d4edda;
-            border-left-color: #28a745;
-            color: #155724;
-        }
-        .alert-info { background: #d1ecf1; border-left-color: #17a2b8; }
-        .fund-source {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin: 5px 0;
-            border-left: 3px solid #667eea;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .fund-source .label { color: #555; font-weight: 500; }
-        .fund-source .amount { color: #667eea; font-weight: bold; }
-        .fund-source.free { border-left-color: #28a745; }
-        .fund-source.free .amount { color: #28a745; }
-        .fund-balance {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: center;
-        }
-        .fund-balance .label { font-size: 0.9em; opacity: 0.9; }
-        .fund-balance .amount { font-size: 1.8em; font-weight: bold; margin: 5px 0; }
-        .fund-balance .note { font-size: 0.8em; opacity: 0.85; }
-        .progress-bar {
-            height: 8px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 4px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background: white;
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-        .claim-highlight {
-            background: #fff3cd;
-            border-left: 3px solid #ffc107;
-            padding: 8px 12px;
-            border-radius: 5px;
-            margin: 3px 0;
-            font-size: 0.9em;
-        }
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; margin-bottom: 20px; }
+        h2 { color: #555; border-bottom: 2px solid #667eea; padding-bottom: 8px; margin: 0 0 15px 0; font-size: 1.3em; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #667eea; color: white; font-weight: 600; }
+        .total { font-weight: bold; background: #f0f0f0; }
+        .balance { font-size: 1.5em; color: #28a745; font-weight: bold; text-align: center; padding: 15px; background: #d4edda; border-radius: 5px; }
+        .note { font-size: 0.9em; color: #666; margin-top: 5px; }
+        .claim-new { background: #fff3cd; }
+        @media print { body { background: white; } .card { box-shadow: none; } }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX Logo" class="logo" onerror="this.src='image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23667eea%22/><text x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22>BX</text></svg>'">
-            <h1>🚀 BossX</h1>
-            <p>Company Records & Founders Dashboard</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Last Updated: <span id="currentDate"></span></p>
-        </div>
 
-        <!-- Statistics Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Total Founders</h3>
-                <div class="value">4</div>
-                <div class="subtext">Active Members</div>
-            </div>
-            <div class="stat-card">
-                <h3>Founder Deposits</h3>
-                <div class="value">$200</div>
-                <div class="subtext">4 x $50</div>
-            </div>
-            <div class="stat-card success">
-                <h3>Free Fund Balance</h3>
-                <div class="value">$278.20</div>
-                <div class="subtext">After Fajar's new claims</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Company Fund</h3>
-                <div class="value">$618.50</div>
-                <div class="subtext">$200 + $406.90</div>
-            </div>
-            <div class="stat-card">
-                <h3>Total Tokens</h3>
-                <div class="value">3,112.26</div>
-                <div class="subtext"><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> BossX</span></div>
-            </div>
-            <div class="stat-card">
-                <h3>Fajar's New Claims</h3>
-                <div class="value">$128.70</div>
-                <div class="subtext">Deducted from Free Fund</div>
-            </div>
-        </div>
+    <h1>🚀 BossX - Company Records</h1>
 
-        <!-- Founders Basic Info -->
-        <div class="section">
-            <h2>👥 Founders & Initial Capital</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Founder Name</th>
-                        <th>Initial Deposit</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><strong>Fery</strong></td>
-                        <td>$50.00</td>
-                        <td><span class="badge badge-success">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><strong>Adhan</strong></td>
-                        <td>$50.00</td>
-                        <td><span class="badge badge-success">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><strong>Fajar</strong></td>
-                        <td>$50.00</td>
-                        <td><span class="badge badge-success">Active</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><strong>Mirwan</strong></td>
-                        <td>$50.00</td>
-                        <td><span class="badge badge-success">Active</span></td>
-                    </tr>
-                    <tr style="background: #e9ecef; font-weight: bold;">
-                        <td colspan="2">TOTAL DEPOSITS</td>
-                        <td>$200.00</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <!-- Founders -->
+    <div class="card">
+        <h2>👥 Founders & Deposit</h2>
+        <table>
+            <tr><th>Nama</th><th>Deposit</th></tr>
+            <tr><td>Fery</td><td>$50.00</td></tr>
+            <tr><td>Adhan</td><td>$50.00</td></tr>
+            <tr><td>Fajar</td><td>$50.00</td></tr>
+            <tr><td>Mirwan</td><td>$50.00</td></tr>
+            <tr class="total"><td>TOTAL DEPOSIT</td><td>$200.00</td></tr>
+        </table>
+    </div>
 
-        <!-- Company Activities - FREE FUND DEDUCTION (FAJAR ONLY) -->
-        <div class="section">
-            <h2>🏢 Free Fund & Fajar's Claims</h2>
-            
-            <h3 style="color:#667eea; margin:15px 0 10px; font-size:1.1em;">💰 Free Fund Source</h3>
-            <div class="fund-source free">
-                <span class="label">🎁 Free Fund (Initial)</span>
-                <span class="amount">$406.90</span>
-            </div>
-
-            <h3 style="color:#667eea; margin:25px 0 10px; font-size:1.1em;">📉 Deducted: Fajar's New Claims Only</h3>
-            
-            <div style="background:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:15px;">
-                <div class="claim-highlight">
-                    <strong>💼 Gaji Karyawan (3 hari)</strong><br>
-                    Amount: $28.70 | Tokens: 33.76 🪙
-                </div>
-                <div class="claim-highlight">
-                    <strong>🔍 Bayar Audit</strong><br>
-                    Amount: $100.00 | Tokens: 117.65 🪙
-                </div>
-                <div style="margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; font-weight:bold; display:flex; justify-content:space-between;">
-                    <span>Total Deduction:</span>
-                    <span style="color:#dc3545;">$128.70</span>
-                </div>
-            </div>
-
-            <!-- Free Fund Balance Status -->
-            <div class="fund-balance">
-                <div class="label">🎁 Free Fund Remaining Balance</div>
-                <div class="amount">$278.20</div>
-                <div class="note">$406.90 − $128.70 = Remaining</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 68.4%;"></div>
-                </div>
-                <div style="font-size:0.8em; margin-top:5px;">✅ Free Fund still available for future claims</div>
-            </div>
-
-            <div class="alert alert-success" style="margin-top:15px;">
-                <strong>✅ Status:</strong> Free Fund ($406.90) telah dipotong hanya oleh claim terbaru Fajar ($128.70). 
-                Sisa saldo: <strong>$278.20</strong> tersedia untuk kebutuhan operasional berikutnya.
-            </div>
-
-            <h3 style="color:#667eea; margin:25px 0 10px; font-size:1.1em;">🪙 Fund Usage</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Activity</th>
-                        <th>Description</th>
-                        <th>Amount (USD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Premine BossX Token</td>
-                        <td>Token price: $0.85/token</td>
-                        <td><span style="color:#dc3545; font-weight:bold;">-$618.50</span></td>
-                    </tr>
-                    <tr style="background:#d4edda; font-weight:bold;">
-                        <td>Remaining Balance</td>
-                        <td>After premine activity</td>
-                        <td style="color:#28a745;">$0.00</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Private Wallets Grid -->
-        <div class="grid-2">
-            <!-- Fery Wallet -->
-            <div class="section">
-                <h2>💼 Fery's Wallet</h2>
-                <div class="founder-card">
-                    <h3><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX" class="token-icon"> Wallet Components</h3>
-                    <table>
-                        <thead>
-                            <tr><th>Component</th><th>USD</th><th>Tokens</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Premine Slot 1/2 (Assistance)</td><td>$100.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr><td>Premine Slot 1/2 (Private)</td><td>$350.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 411.76</span></td></tr>
-                            <tr><td>Premine Slot 2/2 (Private)</td><td>$20.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 23.53</span></td></tr>
-                            <tr><td>Claim Scanner</td><td>$30.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 35.29</span></td></tr>
-                            <tr style="background: #d4edda; font-weight: bold;"><td>TOTAL</td><td>$500.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 588.24</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Adhan Wallet -->
-            <div class="section">
-                <h2>💼 Adhan's Wallet</h2>
-                <div class="founder-card">
-                    <h3><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX" class="token-icon"> Wallet Components</h3>
-                    <table>
-                        <thead>
-                            <tr><th>Component</th><th>USD</th><th>Tokens</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Premine Slot 1/2 (Assistance)</td><td>$100.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr><td>Premine Slot 1/2 (Private)</td><td>$100.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr><td>Premine Slot 2/2 (Private)</td><td>$100.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr><td>Claim Rent</td><td>$87.70</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 103.18</span></td></tr>
-                            <tr><td>Claim Internet</td><td>$5.80</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 6.82</span></td></tr>
-                            <tr><td>Claim Electricity</td><td>$5.80</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 6.82</span></td></tr>
-                            <tr><td>Claim Scanner + Coffee</td><td>$82.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 96.47</span></td></tr>
-                            <tr style="background: #fff3cd;"><td><strong>Transfer from Fajar</strong></td><td><strong>$480.00</strong></td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 564.71</span></td></tr>
-                            <tr style="background: #e7f3ff;"><td><strong>Claim Card + Internet</strong></td><td><strong>$11.60</strong></td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 13.65</span></td></tr>
-                            <tr style="background: #d4edda; font-weight: bold;"><td>TOTAL</td><td>$972.90</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 1,144.60</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Fajar Wallet -->
-            <div class="section">
-                <h2>💼 Fajar's Wallet</h2>
-                <div class="founder-card">
-                    <h3><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX" class="token-icon"> Wallet Components</h3>
-                    <table>
-                        <thead>
-                            <tr><th>Component</th><th>USD</th><th>Tokens</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Premine Slot 1/2 (Assistance)</td><td>$100.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr><td>Premine Slot 1/2 (Private)</td><td>$250.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 294.12</span></td></tr>
-                            <tr style="background: #fff3cd;"><td><strong>Premine Slot 2/2 (Remaining)</strong></td><td><strong>$70.00</strong></td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 82.35</span></td></tr>
-                            <tr><td>Claim TRX Fees</td><td>$15.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 17.65</span></td></tr>
-                            <tr><td>Claim Scanner</td><td>$128.80</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 151.53</span></td></tr>
-                            <tr><td>Claim HP + Fan</td><td>$480.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 564.71</span></td></tr>
-                            <tr style="background: #e8f5e9;"><td><strong>💼 Gaji Karyawan (3 hari)</strong></td><td><strong>$28.70</strong></td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 33.76</span></td></tr>
-                            <tr style="background: #fff8e1;"><td><strong>🔍 Bayar Audit</strong></td><td><strong>$100.00</strong></td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 117.65</span></td></tr>
-                            <tr style="background: #d4edda; font-weight: bold;"><td>TOTAL</td><td>$1,172.50</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 1,379.42</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Mirwan Wallet -->
-            <div class="section">
-                <h2>💼 Mirwan's Wallet</h2>
-                <div class="founder-card">
-                    <div class="alert"><strong>No Data Available</strong><br>Mirwan has no recorded private wallet data at this time.</div>
-                    <table>
-                        <thead><tr><th>Component</th><th>USD</th><th>Tokens</th></tr></thead>
-                        <tbody>
-                            <tr><td>No data recorded</td><td>$0.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 0</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Transfer Transaction -->
-        <div class="section">
-            <h2>🔄 Transfer Transaction Record</h2>
-            <div class="alert"><strong>Partial Transfer:</strong> Adhan purchased partial ownership of Fajar's Premine Slot 2/2</div>
-            <table>
-                <thead><tr><th>Transaction Detail</th><th>Information</th></tr></thead>
-                <tbody>
-                    <tr><td>From</td><td><strong>Fajar</strong></td></tr>
-                    <tr><td>To</td><td><strong>Adhan</strong></td></tr>
-                    <tr><td>Asset</td><td>Premine Private Slot 2/2</td></tr>
-                    <tr><td>Original Value</td><td>$550.00</td></tr>
-                    <tr><td>Transferred Value</td><td><span class="highlight">$480.00</span> <span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 564.71</span></td></tr>
-                    <tr><td>Remaining with Fajar</td><td><span class="highlight">$70.00</span> <span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 82.35</span></td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Summary Table -->
-        <div class="section">
-            <h2>📊 Founders Token Summary</h2>
-            <table>
-                <thead>
-                    <tr><th>Founder</th><th>Total USD</th><th>Total Tokens</th><th>Percentage</th><th>Claims</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><strong>Fery</strong></td><td>$500.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 588.24</span></td><td>18.90%</td><td>$30.00</td></tr>
-                    <tr><td><strong>Adhan</strong></td><td>$972.90</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 1,144.60</span></td><td>36.78%</td><td>$192.90</td></tr>
-                    <tr><td><strong>Fajar</strong></td><td>$1,172.50</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 1,379.42</span></td><td>44.32%</td><td>$752.50</td></tr>
-                    <tr><td><strong>Mirwan</strong></td><td>$0.00</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 0</span></td><td>0.00%</td><td>$0.00</td></tr>
-                    <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: bold;">
-                        <td>GRAND TOTAL</td><td>$2,645.40</td><td><span class="token-badge"><img src="https://i.ibb.co.com/0yXngT4c/Picsart-25-04-01-16-25-47-054.png" alt="BossX"> 3,112.26</span></td><td>100%</td><td>$975.40</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Important Notes -->
-        <div class="section">
-            <h2>📝 Important Notes</h2>
-            <div class="alert alert-info">
-                <ul style="margin-left: 20px; line-height: 1.8;">
-                    <li>All data recorded is <strong>factual</strong> based on provided information</li>
-                    <li>Token calculations based on reference price of <strong>$0.85 per BossX Token</strong></li>
-                    <li>Private wallets are <strong>personal assets</strong>, separate from company assets</li>
-                    <li>Founder deposits: 4 founders × $50 = $200 total</li>
-                    <li><strong>Free Fund ($406.90) is deducted ONLY by Fajar's new claims ($128.70)</strong></li>
-                    <li>✅ Free Fund remaining balance: <strong>$278.20</strong> available for future use</li>
-                    <li>Transfer transaction between Fajar and Adhan is partial transfer ($480 of $550)</li>
-                    <li>For legal purposes, refer to signed Transfer Agreement document</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div style="text-align: center; color: white; margin-bottom: 30px;">
-            <p style="font-size: 0.9em;">© 2026 BossX - Internal Company Records</p>
-            <p style="font-size: 0.8em; margin-top: 5px;">Confidential - For Founders Only</p>
-            <button class="print-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+    <!-- Free Fund -->
+    <div class="card">
+        <h2>🎁 Free Fund Status</h2>
+        <div class="balance">$191.20</div>
+        <div class="note">
+            Awal: $406.90<br>
+            − Fajar Claims: $128.70<br>
+            − Adhan Claims (baru): $87.00<br>
+            = <strong>Sisa: $191.20</strong>
         </div>
     </div>
 
-    <script>
-        const now = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', options);
-        const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.section, .stat-card').forEach((el) => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            el.style.transition = "all 0.6s ease-out";
-            observer.observe(el);
-        });
-    </script>
+    <!-- Claims Summary -->
+    <div class="card">
+        <h2>📋 Claims from Free Fund</h2>
+        <table>
+            <tr><th>Founder</th><th>Item</th><th>Amount</th></tr>
+            <tr><td rowspan="1">Fery</td><td>• Scanner</td><td>$30.00</td></tr>
+            <tr><td rowspan="6">Adhan</td><td>• Rent, Internet, Electricity, Scanner+Coffee, Card+Internet</td><td>$192.90</td></tr>
+            <tr class="claim-new"><td>• <strong>Smart Contract Publication</strong></td><td><strong>$75.00</strong></td></tr>
+            <tr class="claim-new"><td>• <strong>Edukasi BossX</strong></td><td><strong>$12.00</strong></td></tr>
+            <tr><td rowspan="5">Fajar</td><td>• TRX Fees, Scanner, HP+Fan, Salary(3d), Audit</td><td>$752.50</td></tr>
+            <tr class="total"><td colspan="2">TOTAL CLAIMS</td><td>$1,062.40</td></tr>
+        </table>
+    </div>
+
+    <!-- Wallets Summary -->
+    <div class="card">
+        <h2>💼 Private Wallets (Token @$0.85)</h2>
+        <table>
+            <tr><th>Nama</th><th>Total USD</th><th>Total Token</th><th>%</th></tr>
+            <tr><td>Fery</td><td>$500.00</td><td>588.24 🪙</td><td>18.44%</td></tr>
+            <tr><td>Adhan</td><td>$1,059.90</td><td>1,246.95 🪙</td><td>38.78%</td></tr>
+            <tr><td>Fajar</td><td>$1,172.50</td><td>1,379.42 🪙</td><td>42.78%</td></tr>
+            <tr><td>Mirwan</td><td>$0.00</td><td>0 🪙</td><td>0.00%</td></tr>
+            <tr class="total"><td>GRAND TOTAL</td><td>$2,732.40</td><td>3,214.61 🪙</td><td>100%</td></tr>
+        </table>
+    </div>
+
+    <!-- Adhan Detail -->
+    <div class="card">
+        <h2>📄 Adhan Wallet Detail</h2>
+        <table>
+            <tr><th>Komponen</th><th>USD</th><th>Token</th></tr>
+            <tr><td>Premine Slot 1/2 (Assistance)</td><td>$100.00</td><td>117.65 🪙</td></tr>
+            <tr><td>Premine Slot 1/2 (Private)</td><td>$100.00</td><td>117.65 🪙</td></tr>
+            <tr><td>Premine Slot 2/2 (Private)</td><td>$100.00</td><td>117.65 🪙</td></tr>
+            <tr><td>Claim Rent</td><td>$87.70</td><td>103.18 🪙</td></tr>
+            <tr><td>Claim Internet</td><td>$5.80</td><td>6.82 🪙</td></tr>
+            <tr><td>Claim Electricity</td><td>$5.80</td><td>6.82 🪙</td></tr>
+            <tr><td>Claim Scanner + Coffee</td><td>$82.00</td><td>96.47 🪙</td></tr>
+            <tr><td>Transfer from Fajar</td><td>$480.00</td><td>564.71 🪙</td></tr>
+            <tr><td>Claim Card + Internet</td><td>$11.60</td><td>13.65 🪙</td></tr>
+            <tr class="claim-new"><td><strong>✅ Smart Contract Publication</strong></td><td><strong>$75.00</strong></td><td><strong>88.24 🪙</strong></td></tr>
+            <tr class="claim-new"><td><strong>✅ Edukasi BossX</strong></td><td><strong>$12.00</strong></td><td><strong>14.12 🪙</strong></td></tr>
+            <tr class="total"><td>TOTAL ADHAN</td><td>$1,059.90</td><td>1,246.95 🪙</td></tr>
+        </table>
+    </div>
+
+    <!-- Notes -->
+    <div class="card">
+        <h2>📝 Catatan</h2>
+        <ul style="margin:0; padding-left:20px; color:#555; line-height:1.6;">
+            <li>Token dihitung dengan harga acuan <strong>$0.85 / BossX Token</strong></li>
+            <li>Free Fund ($406.90) dipotong claim Fajar ($128.70) + Adhan baru ($87.00)</li>
+            <li><strong>Sisa dana perusahaan: $191.20</strong> tersedia untuk operasional berikutnya</li>
+            <li>Wallet pribadi adalah aset masing-masing pendiri, terpisah dari aset perusahaan</li>
+        </ul>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="window.print()" style="background:#667eea; color:white; border:none; padding:12px 30px; border-radius:25px; cursor:pointer; font-size:1em;">🖨️ Print / Save PDF</button>
+        <p style="font-size:0.85em; color:#888; margin-top:15px;">© 2026 BossX - Internal Use Only</p>
+    </div>
+
 </body>
 </html>
