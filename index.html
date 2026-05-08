@@ -70,6 +70,8 @@
             font-size: 0.85em;
             margin-top: 5px;
         }
+        .stat-card.warning .value { color: #dc3545; }
+        .stat-card.warning { border: 2px solid #dc3545; }
         .section {
             background: white;
             padding: 30px;
@@ -112,6 +114,7 @@
         }
         .badge-success { background: #d4edda; color: #155724; }
         .badge-warning { background: #fff3cd; color: #856404; }
+        .badge-danger { background: #f8d7da; color: #721c24; }
         .badge-info { background: #d1ecf1; color: #0c5460; }
         .founder-card {
             background: #f8f9fa;
@@ -192,6 +195,11 @@
             background: #d1ecf1;
             border-left-color: #17a2b8;
         }
+        .alert-danger {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
         .fund-source {
             background: #f8f9fa;
             padding: 10px 15px;
@@ -206,6 +214,36 @@
         .fund-source .amount { color: #667eea; font-weight: bold; }
         .fund-source.free { border-left-color: #28a745; }
         .fund-source.free .amount { color: #28a745; }
+        .fund-balance {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .fund-balance.negative {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+        }
+        .fund-balance .label { font-size: 0.9em; opacity: 0.9; }
+        .fund-balance .amount { font-size: 1.8em; font-weight: bold; margin: 5px 0; }
+        .fund-balance .note { font-size: 0.8em; opacity: 0.85; }
+        .progress-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+        .progress-fill.over {
+            background: #ffc107;
+        }
     </style>
 </head>
 <body>
@@ -230,10 +268,10 @@
                 <div class="value">$200</div>
                 <div class="subtext">4 x $50</div>
             </div>
-            <div class="stat-card">
-                <h3>Free Fund</h3>
-                <div class="value">$406.90</div>
-                <div class="subtext">Separate allocation</div>
+            <div class="stat-card warning">
+                <h3>Free Fund Balance</h3>
+                <div class="value">-$568.50</div>
+                <div class="subtext">After claims deduction</div>
             </div>
             <div class="stat-card">
                 <h3>Total Company Fund</h3>
@@ -248,7 +286,7 @@
             <div class="stat-card">
                 <h3>Total Claims</h3>
                 <div class="value">$975.40</div>
-                <div class="subtext">Reimbursements</div>
+                <div class="subtext">Deducted from Free Fund</div>
             </div>
         </div>
 
@@ -298,14 +336,11 @@
             </table>
         </div>
 
-        <!-- Company Activities - SIMPLIFIED -->
+        <!-- Company Activities - WITH FREE FUND DEDUCTION -->
         <div class="section">
-            <h2>🏢 Company Fund Sources</h2>
-            <div class="alert alert-info">
-                <strong>Note:</strong> Free Fund ($406.90) is recorded separately and not automatically summed with founder deposits.
-            </div>
+            <h2>🏢 Company Fund & Claims Tracking</h2>
             
-            <h3 style="color:#667eea; margin:15px 0 10px; font-size:1.1em;">💰 Fund Breakdown</h3>
+            <h3 style="color:#667eea; margin:15px 0 10px; font-size:1.1em;">💰 Fund Sources</h3>
             
             <div class="fund-source">
                 <span class="label">Fery Deposit</span>
@@ -324,7 +359,7 @@
                 <span class="amount">$50.00</span>
             </div>
             <div class="fund-source free">
-                <span class="label">🎁 Free Fund (Separate)</span>
+                <span class="label">🎁 Free Fund (Initial)</span>
                 <span class="amount">$406.90</span>
             </div>
             
@@ -333,9 +368,57 @@
                     <span>Total Company Fund:</span>
                     <span style="color:#667eea;">$618.50</span>
                 </div>
-                <div style="font-size:0.85em; color:#888; margin-top:5px;">
-                    ($50×4 founders + $406.90 free fund)
+            </div>
+
+            <h3 style="color:#667eea; margin:25px 0 10px; font-size:1.1em;">📉 Claims Deducted from Free Fund</h3>
+            
+            <div style="background:#f8f9fa; padding:15px; border-radius:8px; margin-bottom:15px;">
+                <table style="margin:0;">
+                    <thead>
+                        <tr>
+                            <th>Founder</th>
+                            <th>Claim Items</th>
+                            <th>Total Claim</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fery</strong></td>
+                            <td>• Scanner</td>
+                            <td>$30.00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Adhan</strong></td>
+                            <td>• Rent, Internet, Electricity, Scanner+Coffee, Card+Internet</td>
+                            <td>$192.90</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fajar</strong></td>
+                            <td>• TRX Fees, Scanner, HP+Fan, Salary(3d), Audit</td>
+                            <td>$752.50</td>
+                        </tr>
+                        <tr style="background:#e9ecef; font-weight:bold;">
+                            <td colspan="2">TOTAL CLAIMS</td>
+                            <td style="color:#dc3545;">$975.40</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Free Fund Balance Status -->
+            <div class="fund-balance negative">
+                <div class="label">🎁 Free Fund Remaining Balance</div>
+                <div class="amount">-$568.50</div>
+                <div class="note">Initial: $406.90 − Claims: $975.40 = Deficit</div>
+                <div class="progress-bar">
+                    <div class="progress-fill over" style="width: 100%;"></div>
                 </div>
+                <div style="font-size:0.8em; margin-top:5px;">⚠️ Free Fund exhausted. Additional funding needed.</div>
+            </div>
+
+            <div class="alert alert-danger" style="margin-top:15px;">
+                <strong>⚠️ Perhatian:</strong> Total claim ($975.40) melebihi Free Fund ($406.90). 
+                Tersisa defisit <strong>-$568.50</strong> yang perlu ditutup dengan dana tambahan.
             </div>
 
             <h3 style="color:#667eea; margin:25px 0 10px; font-size:1.1em;">🪙 Fund Usage</h3>
@@ -477,7 +560,7 @@
                 </div>
             </div>
 
-            <!-- Fajar Wallet - UPDATED -->
+            <!-- Fajar Wallet -->
             <div class="section">
                 <h2>💼 Fajar's Wallet</h2>
                 <div class="founder-card">
@@ -611,7 +694,7 @@
             </table>
         </div>
 
-        <!-- Summary Table - UPDATED -->
+        <!-- Summary Table -->
         <div class="section">
             <h2>📊 Founders Token Summary</h2>
             <table>
@@ -621,7 +704,7 @@
                         <th>Total USD</th>
                         <th>Total Tokens</th>
                         <th>Percentage</th>
-                        <th>Claims/Reimbursements</th>
+                        <th>Claims (Deducted from Free Fund)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -673,8 +756,8 @@
                     <li>Token calculations based on reference price of <strong>$0.85 per BossX Token</strong></li>
                     <li>Private wallets are <strong>personal assets</strong>, separate from company assets</li>
                     <li>Founder deposits: 4 founders × $50 = $200 total</li>
-                    <li>Free Fund ($406.90) is recorded separately per request</li>
-                    <li>Fajar: Added employee salary (3 days) $28.70 + Audit payment $100.00</li>
+                    <li><strong>Free Fund ($406.90) is automatically deducted by total claims ($975.40)</strong></li>
+                    <li>⚠️ Current Free Fund balance: <strong>-$568.50 (Deficit)</strong> - Additional funding required</li>
                     <li>Transfer transaction between Fajar and Adhan is partial transfer ($480 of $550)</li>
                     <li>For legal purposes, refer to signed Transfer Agreement document</li>
                 </ul>
